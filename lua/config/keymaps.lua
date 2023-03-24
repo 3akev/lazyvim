@@ -1,0 +1,13 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+local keymap = vim.keymap
+keymap.set("n", "gb", "<cmd>bnext<cr>", {
+  silent = true,
+  desc = "Next buffer",
+})
+
+keymap.set("n", "gB", "<cmd>bprevious<cr>", {
+  silent = true,
+  desc = "Previous buffer",
+})

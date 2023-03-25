@@ -1,14 +1,14 @@
-if false then
+if true then
   return {}
 end
 
 return {
   -- use mini.completion instead of nvim-cmp
-  { "hrsh7th/nvim-cmp", enabled = false },
+  { "hrsh7th/nvim-cmp",     enabled = false },
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
-  { "hrsh7th/cmp-buffer", enabled = false },
-  { "hrsh7th/cmp-path", enabled = false },
-  { "hrsh7th/cmp-luasnip", enabled = false },
+  { "hrsh7th/cmp-buffer",   enabled = false },
+  { "hrsh7th/cmp-path",     enabled = false },
+  { "hrsh7th/cmp-luasnip",  enabled = false },
 
   {
     "echasnovski/mini.completion",
@@ -18,7 +18,6 @@ return {
     main = "mini.completion",
     opts = {
       delay = { completion = 100, info = 100, signature = 50 },
-
       window = {
         info = { height = 25, width = 80, border = "none" },
         signature = { height = 25, width = 80, border = "none" },
@@ -28,8 +27,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+      { "folke/neoconf.nvim", cmd = "Neoconf",                                config = true },
+      { "folke/neodev.nvim",  opts = { experimental = { pathStrict = true } } },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       { "hrsh7th/cmp-nvim-lsp", enabled = false },

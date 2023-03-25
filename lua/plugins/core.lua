@@ -11,10 +11,6 @@
 return {
 
   -- { "echasnovski/mini.ai", enabled=false },
-
-  -- disable some ui stuff
-  { "rcarriga/nvim-notify",    enabled = false },
-  { "stevearc/dressing.nvim",  enabled = false },
   { "folke/noice.nvim",        enabled = false },
 
   -- disable trouble
@@ -34,6 +30,7 @@ return {
     },
   },
 
+  -- declare language servers
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
@@ -42,7 +39,7 @@ return {
       servers = {
         clangd = {},
         pylsp = {
-                  -- :PylspInstall python-lsp-ruff pyls-isort
+          -- :PylspInstall python-lsp-ruff pyls-isort
           settings = {
             pylsp = {
               plugins = {

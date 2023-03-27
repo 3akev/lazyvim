@@ -1,14 +1,18 @@
-if true then
+if not vim.g.lighter_setup then
   return {}
 end
 
 return {
+  -- disable mason
+  { "williamboman/mason.nvim",           enabled = false },
+  { "williamboman/mason-lspconfig.nvim", enabled = false },
+
   -- use mini.completion instead of nvim-cmp
-  { "hrsh7th/nvim-cmp",     enabled = false },
-  { "hrsh7th/cmp-nvim-lsp", enabled = false },
-  { "hrsh7th/cmp-buffer",   enabled = false },
-  { "hrsh7th/cmp-path",     enabled = false },
-  { "hrsh7th/cmp-luasnip",  enabled = false },
+  { "hrsh7th/nvim-cmp",                  enabled = false },
+  { "hrsh7th/cmp-nvim-lsp",              enabled = false },
+  { "hrsh7th/cmp-buffer",                enabled = false },
+  { "hrsh7th/cmp-path",                  enabled = false },
+  { "hrsh7th/cmp-luasnip",               enabled = false },
 
   {
     "echasnovski/mini.completion",
@@ -24,13 +28,12 @@ return {
       },
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf",                                config = true },
-      { "folke/neodev.nvim",  opts = { experimental = { pathStrict = true } } },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "folke/neoconf.nvim",   cmd = "Neoconf",                                config = true },
+      { "folke/neodev.nvim",    opts = { experimental = { pathStrict = true } } },
       { "hrsh7th/cmp-nvim-lsp", enabled = false },
     },
     ---@param opts PluginLspOpts
@@ -70,25 +73,12 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      local have_mason, mlsp = pcall(require, "mason-lspconfig")
-      local available = have_mason and mlsp.get_available_servers() or {}
-
-      local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(available, server) then
-            setup(server)
-          else
-            ensure_installed[#ensure_installed + 1] = server
-          end
+          setup(server)
         end
-      end
-
-      if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed })
-        mlsp.setup_handlers({ setup })
       end
     end,
   },

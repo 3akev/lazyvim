@@ -13,12 +13,6 @@ return {
   -- { "echasnovski/mini.ai", enabled=false },
   { "folke/noice.nvim",        enabled = false },
 
-  -- disable trouble
-  { "folke/trouble.nvim",      enabled = false },
-
-  -- disable luasnip
-  { "L3MON4D3/LuaSnip",        enabled = false },
-
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
 

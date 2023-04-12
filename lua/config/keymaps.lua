@@ -6,5 +6,6 @@ if vim.g.lighter_setup then
   -- mini.completion keybinds
   vim.api.nvim_set_keymap("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true })
   vim.api.nvim_set_keymap("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
+  vim.api.nvim_set_keymap("i", "<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]], { noremap = true, expr = true })
 end
 vim.api.nvim_set_keymap("n", "<leader>y", ":%y<CR>", { desc = "Yank buffer", noremap = true })

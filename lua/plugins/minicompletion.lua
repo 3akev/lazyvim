@@ -4,15 +4,41 @@ end
 
 return {
   -- disable mason
-  { "williamboman/mason.nvim",           enabled = false },
+  { "williamboman/mason.nvim", enabled = false },
   { "williamboman/mason-lspconfig.nvim", enabled = false },
 
   -- use mini.completion instead of nvim-cmp
-  { "hrsh7th/nvim-cmp",                  enabled = false },
-  { "hrsh7th/cmp-nvim-lsp",              enabled = false },
-  { "hrsh7th/cmp-buffer",                enabled = false },
-  { "hrsh7th/cmp-path",                  enabled = false },
-  { "hrsh7th/cmp-luasnip",               enabled = false },
+  { "hrsh7th/nvim-cmp", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", enabled = false },
+  { "hrsh7th/cmp-buffer", enabled = false },
+  { "hrsh7th/cmp-path", enabled = false },
+  { "hrsh7th/cmp-luasnip", enabled = false },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        root_dir = require("null-ls.utils").root_pattern(
+          ".null-ls-root",
+          ".neoconf.json",
+          "makefile",
+          "Makefile",
+          ".git"
+        ),
+        sources = {
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.diagnostics.fish,
+
+          nls.builtins.formatting.stylua,
+
+          nls.builtins.diagnostics.flake8,
+          nls.builtins.diagnostics.ruff,
+          nls.builtins.formatting.yapf,
+        },
+      }
+    end,
+  },
 
   {
     "echasnovski/mini.completion",
@@ -26,16 +52,34 @@ return {
         info = { height = 25, width = 80, border = "none" },
         signature = { height = 25, width = 80, border = "none" },
       },
+      lsp_completion = { source_func = "completefunc", auto_setup = false },
     },
   },
 
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neoconf.nvim",   cmd = "Neoconf",                                config = true },
-      { "folke/neodev.nvim",    opts = { experimental = { pathStrict = true } } },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
       { "hrsh7th/cmp-nvim-lsp", enabled = false },
     },
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      servers = {
+        pylsp = {
+          on_attach = function(client, buffer)
+            vim.api.nvim_exec([[setlocal completefunc=v:lua.MiniCompletion.completefunc_lsp ]], false)
+          end,
+        },
+        clangd = {
+          on_attach = function(client, buffer)
+            vim.api.nvim_exec([[setlocal completefunc=v:lua.MiniCompletion.completefunc_lsp ]], false)
+          end,
+        },
+      },
+    },
+
     ---@param opts PluginLspOpts
     config = function(_, opts)
       -- setup autoformat

@@ -15,32 +15,6 @@ return {
   { "hrsh7th/cmp-luasnip", enabled = false },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(
-          ".null-ls-root",
-          ".neoconf.json",
-          "makefile",
-          "Makefile",
-          ".git"
-        ),
-        sources = {
-          nls.builtins.formatting.fish_indent,
-          nls.builtins.diagnostics.fish,
-
-          nls.builtins.formatting.stylua,
-
-          nls.builtins.diagnostics.flake8,
-          nls.builtins.diagnostics.ruff,
-          nls.builtins.formatting.yapf,
-        },
-      }
-    end,
-  },
-
-  {
     "echasnovski/mini.completion",
     version = false,
     event = "BufEnter",
@@ -67,6 +41,11 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
+        jedi_language_server = {
+          on_attach = function(client, buffer)
+            vim.api.nvim_exec([[setlocal completefunc=v:lua.MiniCompletion.completefunc_lsp ]], false)
+          end,
+        },
         pylsp = {
           on_attach = function(client, buffer)
             vim.api.nvim_exec([[setlocal completefunc=v:lua.MiniCompletion.completefunc_lsp ]], false)

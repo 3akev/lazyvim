@@ -3,6 +3,10 @@ if not vim.g.lighter_setup then
 end
 
 return {
+  -- disable some ui stuff, for a simpler ui
+  { "rcarriga/nvim-notify", enabled = false },
+  { "stevearc/dressing.nvim", enabled = false },
+
   -- disable mason
   { "williamboman/mason.nvim", enabled = false },
   { "williamboman/mason-lspconfig.nvim", enabled = false },

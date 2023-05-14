@@ -42,7 +42,7 @@ return {
 
           nls.builtins.formatting.stylua,
 
-          nls.builtins.diagnostics.flake8,
+          -- nls.builtins.diagnostics.flake8,
           nls.builtins.diagnostics.ruff,
           nls.builtins.formatting.yapf,
         },
@@ -103,6 +103,7 @@ return {
     opts = {
       ensure_installed = {
         "clang-format",
+        "texlab",
         -- "yapf",
         -- "ruff",
         -- "isort",

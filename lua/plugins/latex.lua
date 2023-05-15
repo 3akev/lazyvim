@@ -39,4 +39,11 @@ return {
       },
     },
   },
+
+  {
+    "icewind/ltex-client.nvim",
+    opts = {
+      user_dictionaries_path = vim.env.HOME .. "/.config/nvim/ltek",
+    },
+  },
 }

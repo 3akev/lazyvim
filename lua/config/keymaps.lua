@@ -10,3 +10,18 @@ if vim.g.lighter_setup then
 end
 
 vim.api.nvim_set_keymap("n", "<localleader>y", ":%y<CR>", { desc = "Yank buffer", noremap = true })
+
+-- alternative dap keybinds
+local dap = require("dap")
+vim.keymap.set("n", "<F5>", function()
+  dap.continue()
+end, { desc = "[Debug] Continue" })
+vim.keymap.set("n", "<F9>", function()
+  dap.step_over()
+end, { desc = "[Debug] Step over" })
+vim.keymap.set("n", "<F10>", function()
+  dap.step_into()
+end, { desc = "[Debug] Step into" })
+vim.keymap.set("n", "<F12>", function()
+  dap.step_out()
+end, { desc = "[Debug] Step out" })

@@ -74,11 +74,17 @@ return {
             }
           }
         },
+        bashls = { mason = false },
         jsonls = { mason = false },
+        jdtls = {},
       },
     },
   },
 
+  -- plugin for java
+  {
+    "mfussenegger/nvim-jdtls"
+  },
 
   -- add more treesitter parsers
   {

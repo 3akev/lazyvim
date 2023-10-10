@@ -9,23 +9,10 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-
-  -- { "echasnovski/mini.ai", enabled=false },
-  { "folke/noice.nvim",        enabled = false },
-
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
+  -- { "folke/noice.nvim",        enabled = false },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     opts = function()
       local nls = require("null-ls")
       return {
@@ -57,10 +44,19 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
-        clangd = {},
+        clangd = {
+          capabilities = {
+            textDocument = {
+              completion = {
+                editsNearCursor = true,
+              },
+            },
+            offsetEncoding = 'utf-16',
+          }
+        },
         jedi_language_server = {
           -- enabled = false,
-        },  -- pip install --user -U jedi-language-server
+        }, -- pip install --user -U jedi-language-server
         pylsp = {
           enabled = false,
           -- :PylspInstall python-lsp-ruff pyls-isort

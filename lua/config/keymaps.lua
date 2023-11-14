@@ -2,28 +2,15 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.api.nvim_set_keymap("n", "<localleader>y", ":%y<CR>", { desc = "Yank buffer", noremap = true })
+-- refactoring plugin keymaps
+vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
 
-if vim.g.vscode then
-  local vscode_neovim = require("vscode-neovim")
+vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
 
-  -- activate copilot suggestion with ctrl+/ in normal mode (only in vscode)
-  vim.keymap.set("n", "<C-/>", function()
-    vscode_neovim.notify("github.copilot.acceptCursorPanelSolution")
-  end, { desc = "Accept copilot suggestion" })
-else
-  -- alternative dap keybinds
-  local dap = require("dap")
-  vim.keymap.set("n", "<F5>", function()
-    dap.continue()
-  end, { desc = "[Debug] Continue" })
-  vim.keymap.set("n", "<F9>", function()
-    dap.step_over()
-  end, { desc = "[Debug] Step over" })
-  vim.keymap.set("n", "<F10>", function()
-    dap.step_into()
-  end, { desc = "[Debug] Step into" })
-  vim.keymap.set("n", "<F12>", function()
-    dap.step_out()
-  end, { desc = "[Debug] Step out" })
-end
+vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+
+vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
+
+vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")

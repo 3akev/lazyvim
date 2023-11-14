@@ -1,6 +1,6 @@
-if not vim.g.enable_latex then
-  return {}
-end
+-- if not vim.g.enable_latex then
+--   return {}
+-- end
 
 return {
   {
@@ -19,10 +19,8 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
+    opts = function(_, opts)
+      opts.servers = vim.list_extend(opts.servers or {}, {
         texlab = {
           build = {
             executable = "tectonic",
@@ -36,10 +34,9 @@ return {
             },
           },
         },
-      },
-    },
+      })
+    end,
   },
-
   {
     "icewind/ltex-client.nvim",
     opts = {

@@ -16,9 +16,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("refactoring").setup()
-    end,
+    config = true
   },
   {
     "nvimtools/none-ls.nvim",
@@ -27,6 +25,7 @@ return {
       opts.sources = vim.list_extend(opts.sources or {}, {
         nls.builtins.code_actions.refactoring,
       })
+      return opts
     end,
   },
 }

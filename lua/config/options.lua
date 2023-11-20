@@ -7,3 +7,4 @@ vim.o.conceallevel = 0
 vim.g.maplocalleader = ","
 
 vim.g.ltex_language = "fr"
+vim.g.c_vimtex_build_dir = "./build"

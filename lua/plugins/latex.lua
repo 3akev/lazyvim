@@ -1,7 +1,3 @@
--- if not vim.g.enable_latex then
---   return {}
--- end
-
 return {
   {
     "lervag/vimtex",
@@ -18,8 +14,8 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      opts.servers = vim.list_extend(opts.servers or {}, {
+    opts = {
+      servers = {
         texlab = {
           build = {
             auxDirectory = vim.g.c_vimtex_build_dir,
@@ -27,7 +23,7 @@ return {
             pdfDirectory = vim.g.c_vimtex_build_dir,
             executable = "tectonic",
             args = { "--synctex", "--keep-logs", "--keep-intermediates", "%f" },
-            onSave = true,
+            onSave = false,
           },
           chktex = {
             onEdit = true,
@@ -37,15 +33,17 @@ return {
         ltex = {
           settings = {
             ltex = {
-              language = vim.g.ltex_language,
+              language = "fr",
             },
           },
         },
-      })
-    end,
+      },
+    },
   },
+
   {
     "icewind/ltex-client.nvim",
+    ft = { "tex", "bib" },
     opts = {
       user_dictionaries_path = vim.env.HOME .. "/.config/nvim/ltek",
     },

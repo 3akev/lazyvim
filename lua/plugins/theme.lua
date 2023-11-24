@@ -2,7 +2,11 @@ return {
   {
     "folke/tokyonight.nvim",
     opts = {
-      transparent = vim.g.transparent_bg,
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
     },
   },
   {

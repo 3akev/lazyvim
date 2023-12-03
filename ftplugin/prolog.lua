@@ -1,15 +1,5 @@
-local function sanitize_output(output)
-  output = output.gsub(output, "^[:][!].*$", "")
-  output = output.gsub(output, "shell returned %d", "")
-  output = output.gsub(output, "^\n+", "")
-  output = output.gsub(output, "\n+$", "")
-  output = output.gsub(output, "\n+", "\n")
-  local _, pos = string.find(output, "\n")
-  if pos ~= nil then
-    return output.sub(output, pos + 1)
-  else
-    return output
-  end
+local function strip(s)
+  return s:gsub("^%s*(.-)%s*$", "%1")
 end
 
 local function get_goal()
@@ -26,35 +16,54 @@ local function get_goal()
   else
     for _, line in ipairs(vim.fn.getline(b, e)) do
       if line ~= "" then
-        goal = goal .. line .. "\\n"
+        goal = goal .. line .. "\n"
       end
     end
-    if goal.len(goal) > 0 then
-      goal = goal.sub(goal, 1, goal.len(goal) - 2)
-    end
+    goal = strip(goal)
   end
 
   return goal
 end
 
-local function _run_eclipse(options)
+local function eclipserun(options)
   local goal = get_goal()
 
   if goal == "" then
     vim.notify("No goal", vim.log.levels.ERROR)
     return
   end
-  local cmd = string.format("!echo -e '%s' | eclipserun %s '%s'", goal, options, vim.fn.expand("%:p"))
-  local output = vim.fn.execute(cmd)
-  output = sanitize_output(output)
-  if vim.v.shell_error == 0 then
-    vim.notify(output, vim.log.levels.INFO)
-  else
-    vim.notify(output, vim.log.levels.ERROR)
+  local cmd = string.format("eclipserun %s --file '%s'", options, vim.fn.expand("%:p"))
+
+  -- add each goal line as a separate argument
+  for line in goal:gmatch("[^\r\n]+") do
+    cmd = string.format(cmd .. " '%s'", line)
   end
+
+  local output = ""
+
+  local function process_output(_, data, _)
+    for _, x in pairs(data) do
+      output = output .. x .. "\n"
+    end
+  end
+
+  vim.fn.jobstart(cmd, {
+    stdout_buffered = true,
+    on_stdout = process_output,
+    stderr_buffered = true,
+    on_stderr = process_output,
+    on_exit = function(_, code)
+      local level = vim.log.levels.INFO
+      if code ~= 0 then
+        level = vim.log.levels.ERROR
+      end
+      output = strip(output)
+      vim.notify(output, level)
+    end,
+  })
 end
 
-local function _run_eclipse_trace()
+local function _run_eclipse(opt)
   local goal = get_goal()
 
   if goal == "" then
@@ -72,7 +81,7 @@ local function _run_eclipse_trace()
   vim.fn.termopen("eclipse")
   vim.api.nvim_put({
     string.format("['%s'].", file),
-    "trace.",
+    opt,
     goal,
     "",
   }, "l", true, true)
@@ -80,15 +89,20 @@ local function _run_eclipse_trace()
   vim.cmd("startinsert")
 end
 
--- keybind run current line/selection as goal
+-- eclipserun stuff
 vim.keymap.set({ "n", "v" }, "<localleader>r", function()
-  _run_eclipse("")
+  eclipserun("")
 end, { desc = "Run goal" })
 
 vim.keymap.set({ "n", "v" }, "<localleader>R", function()
-  _run_eclipse("-a")
+  eclipserun("--all")
 end, { desc = "Run goal (all results)" })
 
+-- built in stuff
 vim.keymap.set({ "n", "v" }, "<localleader>t", function()
-  _run_eclipse_trace()
-end, { desc = "Run goal (trace)" })
+  _run_eclipse("trace.")
+end, { desc = "Run goal in terminal (trace)" })
+
+vim.keymap.set({ "n", "v" }, "<localleader>e", function()
+  _run_eclipse("")
+end, { desc = "Run goal in terminal" })

@@ -7,7 +7,7 @@ return {
         bashls = { mason = false },
         dartls = {},
         r_language_server = { mason = false },
-        prolog_ls = {},
+        -- prolog_ls = {},
       },
     },
   },

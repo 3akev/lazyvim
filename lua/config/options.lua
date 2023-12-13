@@ -6,3 +6,7 @@ vim.o.conceallevel = 0
 vim.g.maplocalleader = ","
 
 vim.g.c_vimtex_build_dir = "./build"
+
+-- prolog stuff
+vim.g.prolog_eclipse_window_id = nil
+vim.g.prolog_eclipse_term_job_id = nil

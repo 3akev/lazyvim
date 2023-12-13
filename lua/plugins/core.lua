@@ -9,15 +9,6 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- multi-language refactoring plugin
-  {
-    "ThePrimeagen/refactoring.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = true
-  },
   {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)

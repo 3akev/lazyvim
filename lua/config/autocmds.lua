@@ -1,13 +1,33 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
+--
+-- vim.api.nvim_create_augroup("VimtexBuildOnSave", {})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   group = "VimtexBuildOnSave",
+--   pattern = { "*.tex" },
+--   callback = function(_)
+--     vim.cmd("silent !mkdir -p " .. vim.g.c_vimtex_build_dir)
+--     vim.cmd("VimtexCompileSS")
+--   end,
+-- })
 
-vim.api.nvim_create_augroup("VimtexBuildOnSave", {})
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  group = "VimtexBuildOnSave",
-  pattern = { "*.tex" },
-  callback = function(_)
-    vim.cmd("silent !mkdir -p " .. vim.g.c_vimtex_build_dir)
-    vim.cmd("VimtexCompileSS")
-  end,
-})
+-- add autocmd to banish completion menu after pressing C-e in insert mode, until exiting it
+-- vim.api.nvim_create_augroup("BanishCompletionMenu", {})
+-- vim.api.nvim_create_autocmd({ "TextChangedP" }, {
+--   group = "BanishCompletionMenu",
+--   pattern = { "*" },
+--   callback = function(_)
+--     if vim.b.completion_menu_banished ~= nil then
+--       -- vim.cmd("call complete#closepopup()")
+--       -- vim.b.completion_menu_banished = false
+--     end
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd({ "CompleteDone" }, {
+--   group = "BanishCompletionMenu",
+--   pattern = { "*" },
+--   callback = function(_)
+--     vim.b.completion_menu_banished = nil
+--   end,
+-- })

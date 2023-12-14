@@ -30,6 +30,7 @@ return {
   {
     "3akev/ecl.nvim",
     opts = {},
+    ft = "prolog",
   },
 
   {

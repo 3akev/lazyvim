@@ -8,6 +8,7 @@ return {
         dartls = {},
         r_language_server = { mason = false },
         -- prolog_ls = {},
+        phpactor = {},
       },
     },
   },

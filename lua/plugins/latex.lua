@@ -1,12 +1,26 @@
+local root_dir = ""
+local build_dir = ""
 local tectonic_toml = vim.fs.find("Tectonic.toml", { upward = true })[1]
-local root_dir = vim.fs.dirname(tectonic_toml)
+if tectonic_toml ~= nil then
+  root_dir = vim.fs.dirname(tectonic_toml)
 
-local get_idx_file = "ruby -n -e 'BEGIN{in_output=false}; if $_ =~ /output/ then in_output=true end; if in_output and $_ =~ /name\\s*=\\s*\"([^\"]*)/ then print $1 end' < "
-  .. tectonic_toml
-local build_subdir = vim.fn.system(get_idx_file)
+  local get_idx_file = "ruby -n -e 'BEGIN{in_output=false}; if $_ =~ /output/ then in_output=true end; if in_output and $_ =~ /name\\s*=\\s*\"([^\"]*)/ then print $1 end' < "
+    .. tectonic_toml
+  local build_subdir = vim.fn.system(get_idx_file)
 
-local build_dir = root_dir .. "/build/" .. build_subdir
-vim.env.VIMTEX_OUTPUT_DIRECTORY = build_dir
+  build_dir = root_dir .. "/build/" .. build_subdir
+  vim.env.VIMTEX_OUTPUT_DIRECTORY = build_dir
+
+  vim.api.nvim_create_autocmd("BufReadPre", {
+    pattern = "*",
+    callback = function()
+      local get_main_file = "ruby -n -e 'BEGIN{in_output=false}; if $_ =~ /output/ then in_output=true end; if in_output and $_ =~ /index\\s*=\\s*\"([^\"]*)/ then print $1 end' < "
+        .. tectonic_toml
+      local main_file = vim.fn.system(get_main_file)
+      vim.b.vimtex_main = root_dir .. "/src/" .. main_file
+    end,
+  })
+end
 
 return {
   {
@@ -35,24 +49,23 @@ return {
             auxDirectory = build_dir,
             logDirectory = build_dir,
             pdfDirectory = build_dir,
-            executable = "tectonic",
-            args = {
-              "-X",
-              "compile",
-              "%f",
-              "--outdir " .. build_dir,
-              "--synctex",
-              "--keep-logs",
-              "--keep-intermediates",
-            },
-            onSave = true,
+            -- executable = "tectonic",
+            -- args = {
+            --   "-X",
+            --   "compile",
+            --   "%f",
+            --   "--outdir",
+            --   build_dir,
+            --   "--keep-logs",
+            --   "--keep-intermediates",
+            -- },
+            -- onSave = true,
           },
           chktex = {
             onEdit = true,
             onOpenAndSave = true,
           },
         },
-        vale_ls = {},
       },
     },
   },

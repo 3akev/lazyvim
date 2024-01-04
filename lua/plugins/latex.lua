@@ -5,7 +5,7 @@ if tectonic_toml ~= nil then
   root_dir = vim.fs.dirname(tectonic_toml)
 
   local get_idx_file = "ruby -n -e 'BEGIN{in_output=false}; if $_ =~ /output/ then in_output=true end; if in_output and $_ =~ /name\\s*=\\s*\"([^\"]*)/ then print $1 end' < "
-    .. tectonic_toml
+    .. '"' .. tectonic_toml .. '"'
   local build_subdir = vim.fn.system(get_idx_file)
 
   build_dir = root_dir .. "/build/" .. build_subdir
@@ -15,7 +15,7 @@ if tectonic_toml ~= nil then
     pattern = "*",
     callback = function()
       local get_main_file = "ruby -n -e 'BEGIN{in_output=false}; if $_ =~ /output/ then in_output=true end; if in_output and $_ =~ /index\\s*=\\s*\"([^\"]*)/ then print $1 end' < "
-        .. tectonic_toml
+        .. '"' .. tectonic_toml .. '"'
       local main_file = vim.fn.system(get_main_file)
       vim.b.vimtex_main = root_dir .. "/src/" .. main_file
     end,

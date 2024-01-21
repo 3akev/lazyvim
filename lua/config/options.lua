@@ -4,3 +4,9 @@
 
 vim.o.conceallevel = 0
 vim.g.maplocalleader = ","
+
+-- neovide options
+if vim.g.neovide then
+  vim.g.neovide_transparency = 0.55
+  vim.g.neovide_scale_factor = 0.6
+end

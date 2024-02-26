@@ -1,8 +1,7 @@
 -- very magic mode enabled by default in command line
 -- do not use silent in command mode, it delays rhs key input until the next key
-local keymap = vim.keymap.set
-keymap("n", "/", [[/\v]], { noremap = true })
-keymap("n", "?", [[?\v]], { noremap = true })
+vim.keymap.set("n", "/", [[/\v]], { noremap = true })
+vim.keymap.set("n", "?", [[?\v]], { noremap = true })
 local function enable_very_magic()
   local cmdline, cmdtype = vim.fn.getcmdline(), vim.fn.getcmdtype()
   if cmdtype ~= ":" then
@@ -27,4 +26,4 @@ local function enable_very_magic()
   end
   return "/"
 end
-keymap("c", "/", enable_very_magic, { noremap = true, expr = true })
+vim.keymap.set("c", "/", enable_very_magic, { noremap = true, expr = true })

@@ -2,7 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- require("verymagic")
+require("config.verymagic")
 
 -- refactoring plugin keymaps
 vim.keymap.set("x", "<leader>re", ":Refactor extract ")
@@ -16,8 +16,3 @@ vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
 
 vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
 vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
-
--- banish completion menu after pressing C-e in insert mode
-vim.keymap.set("i", "<C-e>", function()
-  vim.b.completion_menu_banished = true
-end, { expr = true })

@@ -5,6 +5,14 @@
 vim.o.conceallevel = 0
 vim.g.maplocalleader = ","
 
+vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
+
+vim.cmd("highlight! CursorLineNr cterm=bold gui=bold guifg=#838ab3")
+
+vim.o.list = true
+vim.o.listchars = "tab:»·,trail:·,extends:»,precedes:«"
+
 -- neovide options
 if vim.g.neovide then
   vim.g.neovide_transparency = 0.55

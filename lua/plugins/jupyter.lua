@@ -1,21 +1,21 @@
-local function set_keymaps(buf_id)
+local function set_jupynium_keymaps()
   vim.keymap.set(
     { "n", "x" },
     "<localleader>x",
     "<cmd>JupyniumExecuteSelectedCells<CR>",
-    { buffer = buf_id, desc = "Jupynium execute selected cells" }
+    { buffer = true, desc = "Jupynium execute selected cells" }
   )
   vim.keymap.set(
     { "n", "x" },
     "<localleader>c",
     "<cmd>JupyniumClearSelectedCellsOutputs<CR>",
-    { buffer = buf_id, desc = "Jupynium clear selected cells" }
+    { buffer = true, desc = "Jupynium clear selected cells" }
   )
   vim.keymap.set(
     { "n" },
     "<localleader>K",
     "<cmd>JupyniumKernelHover<cr>",
-    { buffer = buf_id, desc = "Jupynium hover (inspect a variable)" }
+    { buffer = true, desc = "Jupynium hover (inspect a variable)" }
   )
   -- vim.keymap.set(
   --   { "n", "x" },
@@ -27,47 +27,67 @@ local function set_keymaps(buf_id)
     { "n", "x" },
     "<localleader>jo",
     "<cmd>JupyniumToggleSelectedCellsOutputsScroll<cr>",
-    { buffer = buf_id, desc = "Jupynium toggle selected cell output scroll" }
+    { buffer = true, desc = "Jupynium toggle selected cell output scroll" }
   )
-  vim.keymap.set("", "<PageUp>", "<cmd>JupyniumScrollUp<cr>", { buffer = buf_id, desc = "Jupynium scroll up" })
-  vim.keymap.set("", "<PageDown>", "<cmd>JupyniumScrollDown<cr>", { buffer = buf_id, desc = "Jupynium scroll down" })
+  -- vim.keymap.set("", "<PageUp>", "<cmd>JupyniumScrollUp<cr>", { buffer = buf_id, desc = "Jupynium scroll up" })
+  -- vim.keymap.set("", "<PageDown>", "<cmd>JupyniumScrollDown<cr>", { buffer = buf_id, desc = "Jupynium scroll down" })
 
   -- server keymaps
   vim.keymap.set(
     { "n" },
     "<localleader>jj",
     "<cmd>JupyniumStartAndAttachToServer<cr>",
-    { buffer = buf_id, desc = "Jupynium start and attach to server" }
+    { buffer = true, desc = "Jupynium start and attach to server" }
   )
 
   vim.keymap.set({ "n" }, "<localleader>js", function()
     return "<cmd>JupyniumStartSync " .. vim.fn.expand("%:t:r:r") .. "<cr>"
-  end, { buffer = buf_id, desc = "Jupynium start sync", expr = true })
+  end, { buffer = true, desc = "Jupynium start sync", expr = true })
+
+  vim.keymap.set(
+    { "n" },
+    "<localleader>f",
+    "<cmd>JupyniumShortsightedToggle<cr>",
+    { buffer = true, desc = "Jupynium toggle shortsighted" }
+  )
 end
+
+local filetypes = { "python" }
 
 return {
   {
     "kiyoon/jupynium.nvim",
-    opt = {
-      use_default_keybindings = false,
+    -- ft = filetypes,
+    keys = {
+      { "<localleader>jj", mode = { "n" }, ft = filetypes, desc = "Jupynium start and attach to server" },
     },
-    config = function(opts)
-      local jupynium = require("jupynium")
-      jupynium.setup(opts)
+    opts = {
+      use_default_keybindings = false,
+      jupynium_file_pattern = { "*.ju.py" },
+    },
+    config = function(_, opts)
+      require("jupynium").setup(opts)
 
-      vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-        pattern = opts.jupynium_file_pattern,
-        callback = function(event)
-          set_keymaps(event.buf)
-        end,
-        -- group = "jupyniumaucmd",
-      })
+      -- set highlight groups for transparency
+      vim.cmd([[
+        hi! link JupyniumCodeCellSeparatorString Pmenu
+        hi! JupyniumCodeCellSeparator cterm=bold gui=bold guifg=#ffc777
+        hi! link JupyniumMarkdownCellSeparator Pmenu
+        hi! link JupyniumMarkdownCellContent Pmenu
+        hi! link JupyniumMagicCommand @keyword
+        hi! JupyniumShortsighted guifg=#4b5271
+      ]])
+
+      set_jupynium_keymaps()
 
       -- stop sync when the buffer is closed
       vim.api.nvim_create_autocmd("BufDelete", {
         pattern = opts.jupynium_file_pattern,
         callback = function(event)
-          vim.cmd("JupyniumStopSync")
+          -- dirty, but works
+          if vim.fn.exists(":JupyniumStopSync") > 0 then
+            vim.cmd("JupyniumStopSync")
+          end
         end,
       })
     end,

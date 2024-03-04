@@ -15,4 +15,13 @@ return {
       colorscheme = "tokyonight-moon",
     },
   },
+  {
+    "lukas-reineke/headlines.nvim",
+    -- opts = {
+    --   markdown = {
+    --     headline_highlights = false,
+    --   },
+    -- },
+    enabled = false,
+  },
 }

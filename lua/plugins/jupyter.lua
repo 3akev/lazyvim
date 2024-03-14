@@ -70,10 +70,10 @@ return {
 
       -- set highlight groups for transparency
       vim.cmd([[
-        hi! link JupyniumCodeCellSeparatorString Pmenu
+        hi! link JupyniumCodeCellSeparatorString JupyniumCodeCellSeparator
         hi! JupyniumCodeCellSeparator cterm=bold gui=bold guifg=#ffc777
-        hi! link JupyniumMarkdownCellSeparator Pmenu
-        hi! link JupyniumMarkdownCellContent Pmenu
+        hi! JupyniumMarkdownCellSeparator cterm=bold gui=bold guifg=#bff757
+        hi! link JupyniumMarkdownCellContent String
         hi! link JupyniumMagicCommand @keyword
         hi! JupyniumShortsighted guifg=#4b5271
       ]])

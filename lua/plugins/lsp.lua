@@ -1,3 +1,5 @@
+-- local util = require("lspconfig.util")
+
 return {
   -- declare language servers
   {
@@ -10,17 +12,8 @@ return {
         phpactor = {},
         vale_ls = { enabled = false },
         jdtls = {},
+        ocamllsp = {},
       },
-    },
-  },
-
-  {
-    "mfussenegger/nvim-jdtls",
-    opts = {
-      root_dir = function()
-        -- this works better for single files
-        return vim.fn.expand("%:p:h")
-      end,
     },
   },
 }

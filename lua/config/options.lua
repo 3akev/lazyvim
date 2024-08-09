@@ -18,3 +18,6 @@ if vim.g.neovide then
   vim.g.neovide_transparency = 0.55
   vim.g.neovide_scale_factor = 0.8
 end
+
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+vim.g.lazyvim_python_lsp = "basedpyright"

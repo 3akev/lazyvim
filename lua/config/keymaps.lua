@@ -16,3 +16,9 @@ vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
 
 vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
 vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+
+-- disable middle click to paste, see :help <MiddleMouse>
+vim.keymap.set({ "n", "i", "v" }, "<MiddleMouse>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<2-MiddleMouse>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<3-MiddleMouse>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<4-MiddleMouse>", "<Nop>")

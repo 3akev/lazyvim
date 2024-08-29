@@ -1,4 +1,9 @@
 -- local util = require("lspconfig.util")
+vim.filetype.add({
+  pattern = {
+    ["hypr.*%.conf"] = "hyprlang",
+  },
+})
 
 return {
   -- declare language servers
@@ -13,6 +18,11 @@ return {
         -- vale_ls = { enabled = false },
         -- jdtls = {},
         -- ocamllsp = {},
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        },
+        pbls = {},
+        hyprls = {},
         basedpyright = {
           settings = {
             basedpyright = {

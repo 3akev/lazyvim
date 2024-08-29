@@ -15,8 +15,13 @@ vim.o.listchars = "tab:»·,trail:·,extends:»,precedes:«"
 
 -- neovide options
 if vim.g.neovide then
-  vim.g.neovide_transparency = 0.55
+  vim.g.neovide_transparency = 0.65
   vim.g.neovide_scale_factor = 0.8
+
+  vim.o.pumblend = 60
+  vim.o.winblend = 60
+
+  vim.api.nvim_set_hl(0, "Normal", { bg = "#1E1E2E" })
 end
 
 -- Set to "basedpyright" to use basedpyright instead of pyright.

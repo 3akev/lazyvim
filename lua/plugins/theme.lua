@@ -1,22 +1,42 @@
 return {
   {
-    "folke/tokyonight.nvim",
+    "LazyVim/LazyVim",
     opts = {
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
+      colorscheme = "catppuccin",
+    },
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      flavour = "mocha",
+      transparent_background = true,
+      integrations = {
+        indent_blankline = {
+          enabled = true,
+          scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+          colored_indent_levels = false,
+        },
+        mason = true,
+        noice = true,
       },
     },
   },
   {
-    "LazyVim/LazyVim",
+    "nvim-lualine/lualine.nvim",
     opts = {
-      colorscheme = "tokyonight-moon",
+      theme = "catppuccin",
     },
   },
-  {
-    "lukas-reineke/headlines.nvim",
-    enabled = false,
-  },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   opts = {
+  --     transparent = true,
+  --     styles = {
+  --       sidebars = "transparent",
+  --       floats = "transparent",
+  --     },
+  --   },
+  -- },
 }

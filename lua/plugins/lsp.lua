@@ -18,10 +18,30 @@ return {
         -- vale_ls = { enabled = false },
         -- jdtls = {},
         -- ocamllsp = {},
+        cssls = {},
+        html = {},
+        angularls = {},
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         },
-        pbls = {},
+        bufls = {
+          root_dir = function(fname)
+            -- vim.notify(vim.inspect(fname))
+            local util = require("lspconfig.util")
+            local match = util.search_ancestors(fname, function(path)
+              local basename = string.gsub(path, ".*/", "")
+              if basename == "proto" and util.path.exists(path) then
+                return path
+              end
+            end)
+
+            if match ~= nil then
+              return match
+            end
+          end,
+        },
+        -- pbls = {
+        -- },
         hyprls = {},
         basedpyright = {
           settings = {

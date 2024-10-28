@@ -1,3 +1,12 @@
+local default_capabilities = {
+  textDocument = {
+    completion = {
+      editsNearCursor = true,
+    },
+  },
+  offsetEncoding = { "utf-8", "utf-16" },
+}
+
 vim.filetype.add({
   pattern = {
     [".*%.typ"] = "typst",
@@ -29,6 +38,8 @@ return {
     opts = {
       servers = {
         tinymist = {
+          -- Fix semantic highlighting stuff when using non-ascii characters
+          offset_encoding = "utf-8",
           single_file_support = true,
           root_dir = function()
             return vim.fn.getcwd()
@@ -36,6 +47,7 @@ return {
           settings = {
             -- formatterMode = "typstyle",
           },
+          capabilities = default_capabilities,
         },
       },
     },
@@ -54,9 +66,9 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = {
-        "tinymist",
-      },
+      -- ensure_installed = {
+      --   "tinymist",
+      -- },
     },
   },
 }

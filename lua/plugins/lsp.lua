@@ -18,9 +18,9 @@ return {
         -- vale_ls = { enabled = false },
         -- jdtls = {},
         -- ocamllsp = {},
-        cssls = {},
+        -- cssls = {},
         html = {},
-        angularls = {},
+        -- angularls = {},
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         },

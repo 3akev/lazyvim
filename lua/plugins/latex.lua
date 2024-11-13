@@ -29,10 +29,20 @@ return {
     config = function()
       vim.g.vimtex_view_general_viewer = "okular"
       vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
-      -- vim.g.vimtex_compiler_method = "generic"
-      -- vim.g.vimtex_compiler_generic = {
-      --   command = "tectonic -X build --keep-logs --keep-intermediates",
+      vim.g.vimtex_compiler_method = "generic"
+      -- vim.g.vimtex_compiler_tectonic = {
+      --   out_dir = "./build",
+      --   options = {
+      --     "--keep-logs",
+      --     "--keep-intermediates",
+      --     "--synctex",
+      --     "-Z search-path=/usr/share/texmf-dist/tex/latex/biblatex",
+      --   },
       -- }
+      vim.g.vimtex_compiler_generic = {
+        command = "ls *.tex | entr -n tectonic $(ls *.tex) -Z search-path=/usr/share/texmf-dist/tex/latex/biblatex --synctex --keep-logs --keep-intermediates --outdir=./build",
+      }
+      vim.g.vimtex_quickfix_mode = 0
     end,
   },
 }

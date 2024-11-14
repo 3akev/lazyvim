@@ -61,6 +61,26 @@ return {
     build = function()
       require("typst-preview").update()
     end,
+    keys = {
+      {
+        "<localleader>tp",
+        ":TypstPreview<CR>",
+        desc = "Start Typst preview",
+        mode = { "n" },
+      },
+      {
+        "<localleader>ts",
+        ":TypstPreviewStop<CR>",
+        desc = "Stop Typst preview",
+        mode = { "n" },
+      },
+      {
+        "<localleader>tt",
+        ":TypstPreviewToggle<CR>",
+        desc = "Toggle Typst preview",
+        mode = { "n" },
+      },
+    },
   },
 
   {

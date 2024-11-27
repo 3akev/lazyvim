@@ -24,22 +24,22 @@ return {
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         },
-        bufls = {
-          root_dir = function(fname)
-            -- vim.notify(vim.inspect(fname))
-            local util = require("lspconfig.util")
-            local match = util.search_ancestors(fname, function(path)
-              local basename = string.gsub(path, ".*/", "")
-              if basename == "proto" and util.path.exists(path) then
-                return path
-              end
-            end)
-
-            if match ~= nil then
-              return match
-            end
-          end,
-        },
+        -- buf_ls = {
+        --   root_dir = function(fname)
+        --     -- vim.notify(vim.inspect(fname))
+        --     local util = require("lspconfig.util")
+        --     local match = util.search_ancestors(fname, function(path)
+        --       local basename = string.gsub(path, ".*/", "")
+        --       if basename == "proto" and util.path.exists(path) then
+        --         return path
+        --       end
+        --     end)
+        --
+        --     if match ~= nil then
+        --       return match
+        --     end
+        --   end,
+        -- },
         -- pbls = {
         -- },
         hyprls = {},

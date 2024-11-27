@@ -39,7 +39,7 @@ return {
       servers = {
         tinymist = {
           -- Fix semantic highlighting stuff when using non-ascii characters
-          -- offset_encoding = "utf-8",
+          offset_encoding = "utf-8",
           single_file_support = true,
           root_dir = function()
             return vim.fn.getcwd()
@@ -47,7 +47,7 @@ return {
           settings = {
             -- formatterMode = "typstyle",
           },
-          capabilities = default_capabilities,
+          -- capabilities = default_capabilities,
         },
       },
     },

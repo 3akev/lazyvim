@@ -2,14 +2,6 @@ return {
   {
     "folke/snacks.nvim",
     keys = {
-      -- {
-      --   "<ESC>",
-      --   "<C-\\><C-n>",
-      --   noremap = true,
-      --   silent = true,
-      --   desc = "Exit terminal mode",
-      --   mode = { "t" },
-      -- },
       {
         "<C-h>",
         "<Cmd>wincmd h<CR>",

@@ -2,15 +2,15 @@ return {
   {
     "echasnovski/mini.align",
     keys = {
-      { "<leader>ga", desc = "Align" },
-      { "<leader>gA", desc = "Align with preview" },
+      { "<localleader>a", desc = "Align", mode = { "n", "v" } },
+      { "<localleader>A", desc = "Align with preview", mode = { "n", "v" } },
     },
     version = false,
     config = function()
       require("mini.align").setup({
         mappings = {
-          start = "<leader>ga",
-          start_with_preview = "<leader>gA",
+          start = "<localleader>a",
+          start_with_preview = "<localleader>A",
         },
       })
     end,

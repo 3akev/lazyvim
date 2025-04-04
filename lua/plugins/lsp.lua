@@ -11,13 +11,15 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+        asm_lsp = {},
+        terraformls = {},
         -- bashls = { mason = false },
         -- dartls = {},
         -- r_language_server = { mason = false },
         -- phpactor = {},
         -- vale_ls = { enabled = false },
         -- jdtls = {},
-        -- ocamllsp = {},
+        ocamllsp = { mason = false },
         -- cssls = {},
         html = {},
         -- angularls = {},
@@ -43,18 +45,18 @@ return {
         -- pbls = {
         -- },
         hyprls = {},
-        basedpyright = {
-          settings = {
-            basedpyright = {
-              analysis = {
-                typeCheckingMode = "basic",
-              },
-            },
-          },
-          -- handlers = {
-          --   ["textDocument/publishDiagnostics"] = function() end,
-          -- },
-        },
+        -- basedpyright = {
+        --   settings = {
+        --     basedpyright = {
+        --       analysis = {
+        --         typeCheckingMode = "basic",
+        --       },
+        --     },
+        --   },
+        --   -- handlers = {
+        --   --   ["textDocument/publishDiagnostics"] = function() end,
+        --   -- },
+        -- },
       },
     },
   },

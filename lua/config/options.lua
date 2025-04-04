@@ -25,4 +25,6 @@ if vim.g.neovide then
 end
 
 -- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "basedpyright"
+-- vim.g.lazyvim_python_lsp = "basedpyright"
+
+vim.g.snacks_animate = false

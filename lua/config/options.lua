@@ -15,7 +15,7 @@ vim.o.listchars = "tab:»·,trail:·,extends:»,precedes:«"
 
 -- neovide options
 if vim.g.neovide then
-  vim.g.neovide_transparency = 0.65
+  vim.g.neovide_opacity = 0.65
   vim.g.neovide_scale_factor = 0.8
 
   vim.o.pumblend = 60

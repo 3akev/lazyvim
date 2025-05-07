@@ -13,6 +13,8 @@ vim.cmd("highlight! CursorLineNr cterm=bold gui=bold guifg=#838ab3")
 vim.o.list = true
 vim.o.listchars = "tab:»·,trail:·,extends:»,precedes:«"
 
+vim.o.completeopt = "popup,menu,menuone,noselect"
+
 -- neovide options
 if vim.g.neovide then
   vim.g.neovide_opacity = 0.65

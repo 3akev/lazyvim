@@ -19,7 +19,7 @@ return {
         -- phpactor = {},
         -- vale_ls = { enabled = false },
         -- jdtls = {},
-        ocamllsp = { mason = false },
+        ocamllsp = { mason = false, cmd = { "ocamllsp", "--fallback-read-dot-merlin" } },
         -- cssls = {},
         html = {},
         -- angularls = {},

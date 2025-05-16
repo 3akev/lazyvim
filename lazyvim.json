@@ -1,8 +1,8 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.nvim-cmp",
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.neogen",
+    "lazyvim.plugins.extras.coding.nvim-cmp",
     "lazyvim.plugins.extras.coding.nvim-cmp",
     "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.editor.dial",
@@ -14,8 +14,6 @@
     "lazyvim.plugins.extras.editor.mini-files",
     "lazyvim.plugins.extras.editor.refactoring",
     "lazyvim.plugins.extras.lang.clangd",
-    "lazyvim.plugins.extras.lang.docker",
-    "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lsp.none-ls",
     "lazyvim.plugins.extras.util.dot",

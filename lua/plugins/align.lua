@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.align",
+    "nvim-mini/mini.align",
     keys = {
       { "<localleader>a", desc = "Align", mode = { "n", "v" } },
       { "<localleader>A", desc = "Align with preview", mode = { "n", "v" } },

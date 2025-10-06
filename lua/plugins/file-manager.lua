@@ -23,7 +23,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     init = function()
       vim.api.nvim_create_autocmd("BufEnter", {
         -- make a group to be able to delete it later

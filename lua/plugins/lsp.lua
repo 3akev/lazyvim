@@ -13,6 +13,7 @@ return {
       servers = {
         asm_lsp = {},
         terraformls = {},
+        qmlls = {},
         -- bashls = { mason = false },
         -- dartls = {},
         -- r_language_server = { mason = false },
@@ -21,6 +22,7 @@ return {
         -- jdtls = {},
         -- ocamllsp = { mason = false, cmd = { "ocamllsp", "--fallback-read-dot-merlin" } },
         -- cssls = {},
+        gdscript = {},
         html = {},
         -- angularls = {},
         clangd = {

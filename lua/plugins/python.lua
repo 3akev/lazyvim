@@ -6,6 +6,7 @@ return {
     opts = {
       formatters_by_ft = {
         python = { "ruff" },
+        xml = { "xmllint" },
       },
       formatters = {
         ruff = { command = "ruff format" },

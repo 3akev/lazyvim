@@ -1,5 +1,5 @@
 local function zoxide_jump()
-  require("fzf-lua").fzf_live("zoxide query --list --score <query>", {
+  FzfLua.fzf_live("zoxide query --list --score <query>", {
     prompt = "Directories> ",
     actions = {
       ["default"] = function(selected)
@@ -10,7 +10,7 @@ local function zoxide_jump()
       end,
     },
     fn_transform = function(x)
-      return require("fzf-lua").make_entry.file(x, { file_icons = true, color_icons = true })
+      return FzfLua.make_entry.file(x, { file_icons = true, color_icons = true })
     end,
   })
 end

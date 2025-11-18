@@ -13,6 +13,7 @@ return {
           scope_color = "lavender",
           colored_indent_levels = false,
         },
+        blink_cmp = true,
         mason = true,
         noice = true,
       },

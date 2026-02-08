@@ -26,7 +26,6 @@ if vim.g.neovide then
   vim.api.nvim_set_hl(0, "Normal", { bg = "#1E1E2E" })
 end
 
--- Set to "basedpyright" to use basedpyright instead of pyright.
--- vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "ty"
 
 vim.g.snacks_animate = false

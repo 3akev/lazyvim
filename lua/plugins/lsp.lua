@@ -1,10 +1,3 @@
--- local util = require("lspconfig.util")
-vim.filetype.add({
-  pattern = {
-    ["hypr.*%.conf"] = "hyprlang",
-  },
-})
-
 return {
   -- declare language servers
   {
@@ -12,7 +5,7 @@ return {
     opts = {
       servers = {
         asm_lsp = {},
-        terraformls = {},
+        -- terraformls = {},
         qmlls = {},
         -- bashls = { mason = false },
         -- dartls = {},
@@ -46,7 +39,7 @@ return {
         -- },
         -- pbls = {
         -- },
-        hyprls = {},
+        -- hyprls = {},
         -- basedpyright = {
         --   settings = {
         --     basedpyright = {
